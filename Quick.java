@@ -33,19 +33,19 @@ public class Quick{
   */
   public static int quickselect(int[] data, int k){
     //out of bounds
-    if (k >= data.length ||k < 0) throw new ArrayIndexOutOfBoundsException();
-    return quickHelper(data, k, 0, data.length - 1);
+    if (k >= data.length || k < 0) throw new ArrayIndexOutOfBoundsException();
+    return quickselectHelper(data, k, 0, data.length - 1);
   }
-  private static int quickHelper(int[] data, int k, int start, int end){
+  private static int quickselectHelper(int[] data, int k, int start, int end){
     int pivot = partition(data, start, end);
     if (k == pivot){
       return data[k];
     }
     if (k < pivot){
-      return quickHelper(data, k, start, data[pivot] - 1);
+      return quickselectHelper(data, k, start, data[pivot] - 1);
     }
     else{
-      return quickHelper(data, k, data[pivot] + 1, end);
+      return quickselectHelper(data, k, data[pivot] + 1, end);
     }
   }
 
@@ -58,6 +58,8 @@ public class Quick{
     for (int x = 0; x < b.length; x++){
       System.out.println(b[x]);
     }
-
+    System.out.println("\n" + "quicksort testing" + "\n");
+    int[] b1 = new int[] {13, 23, 14, 37, 40, 93, 2};
+    System.out.println(quickselect(b1, 0));
   }
 }
