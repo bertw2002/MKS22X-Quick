@@ -23,12 +23,13 @@ public class Quick{
     //lower needs to smaller than increment.
     int lower = start;
     while (lower < upper){
-      while (lower < upper && data[lower] <= pivot){
+      while (lower <= upper && data[lower] < pivot){
         System.out.println("lower: " + lower + "\n" + "upper: " + upper);
         lower++;
       }
-      while (upper > lower && data[upper] >= pivot){
-        upper++;
+      while (upper >= lower && data[upper] > pivot){
+        System.out.println("lower: " + lower + "\n" + "upper: " + upper);
+        upper--;
       }
       if (upper > lower){
         switchPlace(data, upper, lower);
@@ -78,17 +79,17 @@ public class Quick{
 
 
   public static void main(String[] args) {
-
+/*
     int[] b = new int[] {1, 5, 7, 2, 6, 8, 9};
 
     System.out.println("\n" + "partition testing" + "\n");
-    System.out.println("pivot: " + partition(b, 0, 6));
+    System.out.println("pivot: " + partition(b, 3, 6));
 
     for (int x = 0; x < b.length; x++){
       System.out.println(b[x]);
-    }
-    //System.out.println("\n" + "quicksort testing" + "\n");
-    //int[] b1 = new int[] {13, 23, 14, 37, 40, 93, 2};
-    //System.out.println(quickselect(b1, 0));
+    }*/
+    System.out.println("\n" + "quickselect testing" + "\n");
+    int[] b1 = new int[] {13, 23, 14, 37, 40, 93, 2};
+    System.out.println(quickselect(b1, 0));
   }
 }
