@@ -10,7 +10,7 @@ public class Quick{
   private static int whichBig(int x, int y, int z){
     if ((x > y && x < z ) || (x < y && x > z )) return x;
     if ((x > y && y > z ) || (x < y && y < z )) return y;
-    if ((z > y && x < z ) || (z > y && x > z )) return z;
+    return z;
   }
   public static int partition (int [] data, int start, int end){
     int randnum = (int)(Math.random() * (end - start) + start + 1);
@@ -21,15 +21,19 @@ public class Quick{
     //testing purposes
     System.out.println("actual pivot, not index: " + pivot);
     //lower needs to smaller than increment.
-    int lower = start - 1;
-    for (int increment = start; increment < upper; increment++){
-      if (data[increment] <= pivot){
-        //increment lower because element is smaller than pivot.
+    int lower = start;
+    while (lower < upper){
+      while (lower < upper && data[lower] <= pivot){
+        System.out.println("lower: " + lower + "\n" + "upper: " + upper);
         lower++;
-        switchPlace(data, lower, increment);
+      }
+      while (upper > lower && data[upper] >= pivot){
+        upper++;
+      }
+      if (upper > lower){
+        switchPlace(data, upper, lower);
       }
     }
-    switchPlace(data, lower + 1, end);
     //return last position of pivot.
     return lower + 1;
   }
@@ -75,10 +79,10 @@ public class Quick{
 
   public static void main(String[] args) {
 
-    int[] b = new int[] {13, 23, 14, 37, 40, 93, 2, 17, 12, 9, 87, 44, 68};
+    int[] b = new int[] {1, 5, 7, 2, 6, 8, 9};
 
     System.out.println("\n" + "partition testing" + "\n");
-    System.out.println("pivot: " + partition(b, 0, 12));
+    System.out.println("pivot: " + partition(b, 0, 6));
 
     for (int x = 0; x < b.length; x++){
       System.out.println(b[x]);
