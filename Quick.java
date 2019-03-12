@@ -6,18 +6,14 @@ public class Quick{
     data[second] = temp;
   }
   public static int partition (int [] data, int start, int end){
-    int randnum = (int)(Math.random() * (end - start) + start);
+    int randnum = (int)(Math.random() * (end - start) + start + 1);
     switchPlace(data, randnum, end);
     int pivot = data[end];
     int upper = end;
-    System.out.println("pivot: " + pivot);
+    //testing purposes
+    System.out.println("actual pivot, not index: " + pivot);
     //lower needs to smaller than increment.
     int lower = start - 1;
-    /*
-    testing purposes
-    System.out.println("pivot is" + pivot);
-    boolean startTrue = false;
-    boolean endTrue = false;*/
     for (int increment = start; increment < upper; increment++){
       if (data[increment] <= pivot){
         //increment lower because element is smaller than pivot.
@@ -37,33 +33,43 @@ public class Quick{
     return quickselectHelper(data, k, 0, data.length - 1);
   }
   private static int quickselectHelper(int[] data, int k, int start, int end){
+    //testing purposes
+    /*
+    for (int x = 0; x < data.length; x++){
+      System.out.println(data[x]);
+    }*/
+    //testing purposes
+
+    //System.out.println("Start: " + start + "\n" + "End: " + end);
     int pivot = partition(data, start, end);
-    if (k > 0 && k < end){
-      if (k == pivot){
-        return data[k];
-      }
-      if (k < pivot - start + 1){
-        return quickselectHelper(data, k, start, data[pivot] - 1);
-      }
-      else if (k > pivot - start + 1)
-        return quickselectHelper(data, k, data[pivot] + 1, end);
-      }else{
-        return data[pivot];
-      }
+    //if equal, means you have found the kth term.
+    if (k == pivot){
+      return data[k];
+    }
+    //if smaller than pivot, do the recursive to the left because answer is to the left.
+    else if (k < pivot){
+      return quickselectHelper(data, k, start, pivot);
+    }//if bigger than pivot, do the recursive to the right because answer is to the right.
+    else if (k > pivot){
+      return quickselectHelper(data, k, pivot + 1, end);
+    } else{
+      return data[pivot];
     }
   }
 
 
 
+
   public static void main(String[] args) {
+    /*
     int[] b = new int[] {13, 23, 14, 37, 40, 93, 2, 17, 12, 9, 87, 44, 68};
 
     System.out.println("\n" + "partition testing" + "\n");
-    System.out.println("pivot: " + partition(b, 0, 12));
+    System.out.println("pivot: " + partition(b, 10, 12));
 
     for (int x = 0; x < b.length; x++){
       System.out.println(b[x]);
-    }
+    }*/
     System.out.println("\n" + "quicksort testing" + "\n");
     int[] b1 = new int[] {13, 23, 14, 37, 40, 93, 2};
     System.out.println(quickselect(b1, 0));
