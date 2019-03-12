@@ -1,5 +1,6 @@
 public class Quick{
-  public static void switchPlace(int[] data, int first, int second){
+  //helper that switches places
+  private static void switchPlace(int[] data, int first, int second){
     int temp = data[first];
     data[first] = data[second];
     data[second] = temp;
@@ -27,6 +28,25 @@ public class Quick{
     switchPlace(data, lower + 1, end);
     //return last position of pivot.
     return lower + 1;
+  }
+  /*return the value that is the kth smallest value of the array.
+  */
+  public static int quickselect(int[] data, int k){
+    //out of bounds
+    if (k >= data.length ||k < 0) throw new ArrayIndexOutOfBoundsException();
+    return quickHelper(data, k, 0, data.length - 1);
+  }
+  private static int quickHelper(int[] data, int k, int start, int end){
+    int pivot = partition(data, start, end);
+    if (k == pivot){
+      return data[k];
+    }
+    if (k < pivot){
+      return quickHelper(data, k, start, data[pivot] - 1);
+    }
+    else{
+      return quickHelper(data, k, data[pivot] + 1, end);
+    }
   }
 
   public static void main(String[] args) {
