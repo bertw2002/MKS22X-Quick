@@ -36,7 +36,7 @@ public class Quick{
       }
     }
     //return last position of pivot.
-    return lower + 1;
+    return lower;
   }
   /*return the value that is the kth smallest value of the array.
   */
@@ -89,7 +89,7 @@ public class Quick{
       System.out.println(b[x]);
     }*/
     System.out.println("\n" + "quickselect testing" + "\n");
-    int[] b1 = new int[] {13, 23, 14, 37, 40, 93, 2};
-    System.out.println(quickselect(b1, 0));
+    int[] b1 = new int[] {1, 5, 7, 2, 6, 4, 3};
+    System.out.println(quickselect(b1, 3));
   }
 }
