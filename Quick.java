@@ -38,16 +38,22 @@ public class Quick{
   }
   private static int quickselectHelper(int[] data, int k, int start, int end){
     int pivot = partition(data, start, end);
-    if (k == pivot){
-      return data[k];
-    }
-    if (k < pivot){
-      return quickselectHelper(data, k, start, data[pivot] - 1);
-    }
-    else{
-      return quickselectHelper(data, k, data[pivot] + 1, end);
+    if (k > 0 && k < end){
+      if (k == pivot){
+        return data[k];
+      }
+      if (k < pivot - start + 1){
+        return quickselectHelper(data, k, start, data[pivot] - 1);
+      }
+      else if (k > pivot - start + 1)
+        return quickselectHelper(data, k, data[pivot] + 1, end);
+      }else{
+        return data[pivot];
+      }
     }
   }
+
+
 
   public static void main(String[] args) {
     int[] b = new int[] {13, 23, 14, 37, 40, 93, 2, 17, 12, 9, 87, 44, 68};
