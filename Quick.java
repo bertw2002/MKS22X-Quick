@@ -17,8 +17,10 @@ public class Quick{
     //int pivot = data[randnum];
 
     int middle = ((end - start) / 2) + start;
-    int pivot = whichBig(middle, start, end);
+    int pivot = whichBig(data[middle], data[start], data[end]);
     int upper = end;
+    //System.out.println("end:  " + data[start] + "middle: " + data[middle] + "end: " + data[end]);
+    //System.out.println("pivot: " + pivot);
     //testing purposes
     //System.out.println("actual pivot, not index: " + pivot);
     //lower needs to smaller than increment.
@@ -108,16 +110,20 @@ public class Quick{
     System.out.println("\n" + "quickselect testing" + "\n");
     int[] b1 = new int[] {1, 5, 7, 2, 6, 4, 3};
     System.out.println(quickselect(b1, 3));*/
-    /*
     System.out.println("\n" + "quicksort testing" + "\n");
+
     // TEST FOR DUPLICATES LATER
     int[] b2 = new int[] {1, 5, 7, 2, 6, 4, 3, 13, 24, 23, 92, 0, 200};
     quicksort(b2);
     for (int y = 0; y < b2.length; y++){
       System.out.println(b2[y]);
-    }*/
-    System.out.println();
-
+    }
+    System.out.println("\n" + "array 2" + "\n");
+    int[] b3 = new int[] {13, 24, 23, 92, 0};
+    quicksort(b3);
+    for (int y = 0; y < b3.length; y++){
+      System.out.println(b3[y]);
+    }
   }
 
 }
