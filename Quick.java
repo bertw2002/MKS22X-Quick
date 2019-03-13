@@ -13,22 +13,23 @@ public class Quick{
     return z;
   }
   public static int partition (int [] data, int start, int end){
-    int randnum = (int)(Math.random() * (end - start) + start + 1);
-    //switchPlace(data, randnum, end);
-    //int pivot = data[end];
-    int pivot = data[randnum];
+    //int randnum = (int)(Math.random() * (end - start) + start + 1);
+    //int pivot = data[randnum];
+
+    int middle = ((end - start) / 2) + start;
+    int pivot = whichBig(middle, start, end);
     int upper = end;
     //testing purposes
-    System.out.println("actual pivot, not index: " + pivot);
+    //System.out.println("actual pivot, not index: " + pivot);
     //lower needs to smaller than increment.
     int lower = start;
     while (lower < upper){
       while (lower <= upper && data[lower] < pivot){
-        System.out.println("lower: " + lower + "\n" + "upper: " + upper);
+        //System.out.println("lower: " + lower + "\n" + "upper: " + upper);
         lower++;
       }
       while (upper >= lower && data[upper] > pivot){
-        System.out.println("lower: " + lower + "\n" + "upper: " + upper);
+        //System.out.println("lower: " + lower + "\n" + "upper: " + upper);
         upper--;
       }
       if (upper > lower){
@@ -72,7 +73,17 @@ public class Quick{
   /*Modify the array to be in increasing order.
  */
  public static void quicksort(int[] data){
-
+   quicksort(data, 0, data.length - 1);
+ }
+ private static void quicksort(int[] data, int start, int end){
+   if (start >= end) {
+     //as per Mr. K's suggestion.
+     return;
+   }else{
+     int pivot = partition(data, start, end);
+     quicksort(data, start, pivot - 1);
+     quicksort(data, pivot + 1, end);
+   }
  }
 
 
@@ -87,9 +98,16 @@ public class Quick{
 
     for (int x = 0; x < b.length; x++){
       System.out.println(b[x]);
-    }*/
+    }
     System.out.println("\n" + "quickselect testing" + "\n");
     int[] b1 = new int[] {1, 5, 7, 2, 6, 4, 3};
-    System.out.println(quickselect(b1, 3));
+    System.out.println(quickselect(b1, 3));*/
+    System.out.println("\n" + "quicksort testing" + "\n");
+    int[] b2 = new int[] {1, 5, 7, 2, 6, 4, 3};
+    quicksort(b2);
+    for (int y = 0; y < b2.length; y++){
+      System.out.println(b2[y]);
+    }
   }
+
 }
