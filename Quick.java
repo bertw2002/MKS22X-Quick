@@ -7,7 +7,7 @@ public class Quick{
   }
 
   //helper for partition that finds median value
-  private static int whichBig(int x, int y, int z){
+  public static int whichBig(int x, int y, int z){
     if ((x > y && x < z ) || (x < y && x > z )) return x;
     if ((x > y && y > z ) || (x < y && y < z )) return y;
     return z;
@@ -62,7 +62,7 @@ public class Quick{
     }
     //if smaller than pivot, do the recursive to the left because answer is to the left.
     else if (k < pivot){
-      return quickselectHelper(data, k, start, pivot);
+      return quickselectHelper(data, k, start, pivot - 1);
     }//if bigger than pivot, do the recursive to the right because answer is to the right.
     else if (k > pivot){
       return quickselectHelper(data, k, pivot + 1, end);
@@ -80,9 +80,15 @@ public class Quick{
      //as per Mr. K's suggestion.
      return;
    }else{
+
      int pivot = partition(data, start, end);
-     quicksort(data, start, pivot - 1);
-     quicksort(data, pivot + 1, end);
+     //testing purposes
+     //for (int y = 0; y < data.length; y++){
+    //   System.out.println(data[y]);
+    // }
+    // System.out.println("data: ");
+      quicksort(data, start, pivot - 1);
+      quicksort(data, pivot + 1, end);
    }
  }
 
@@ -102,12 +108,16 @@ public class Quick{
     System.out.println("\n" + "quickselect testing" + "\n");
     int[] b1 = new int[] {1, 5, 7, 2, 6, 4, 3};
     System.out.println(quickselect(b1, 3));*/
+    /*
     System.out.println("\n" + "quicksort testing" + "\n");
-    int[] b2 = new int[] {1, 5, 7, 2, 6, 4, 3};
+    // TEST FOR DUPLICATES LATER
+    int[] b2 = new int[] {1, 5, 7, 2, 6, 4, 3, 13, 24, 23, 92, 0, 200};
     quicksort(b2);
     for (int y = 0; y < b2.length; y++){
       System.out.println(b2[y]);
-    }
+    }*/
+    System.out.println();
+
   }
 
 }
