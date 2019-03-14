@@ -22,11 +22,11 @@ public class Quick{
     //System.out.println("end:  " + data[start] + "middle: " + data[middle] + "end: " + data[end]);
     //System.out.println("pivot: " + pivot);
     //testing purposes
-    //System.out.println("actual pivot, not index: " + pivot);
+    System.out.println("actual pivot, not index: " + pivot);
     //lower needs to smaller than increment.
     int lower = start;
     while (lower < upper){
-      while (lower <= upper && data[lower] < pivot){
+      while (lower <= upper && data[lower] <= pivot){
         //System.out.println("lower: " + lower + "\n" + "upper: " + upper);
         lower++;
       }
@@ -85,9 +85,9 @@ public class Quick{
 
      int pivot = partition(data, start, end);
      //testing purposes
-     //for (int y = 0; y < data.length; y++){
-    //   System.out.println(data[y]);
-    // }
+     for (int y = 0; y < data.length; y++){
+       System.out.println(data[y]);
+     }
     // System.out.println("data: ");
       quicksort(data, start, pivot - 1);
       quicksort(data, pivot + 1, end);
@@ -113,16 +113,10 @@ public class Quick{
     System.out.println("\n" + "quicksort testing" + "\n");
 
     // TEST FOR DUPLICATES LATER
-    int[] b2 = new int[] {1, 5, 7, 2, 6, 4, 3, 13, 24, 23, 92, 0, 200};
+    int[] b2 = new int[] {1, 5, 7, 2, 6, 4, 3, 13, 23, 23, 92, 0, 200};
     quicksort(b2);
     for (int y = 0; y < b2.length; y++){
       System.out.println(b2[y]);
-    }
-    System.out.println("\n" + "array 2" + "\n");
-    int[] b3 = new int[] {13, 24, 23, 92, 0};
-    quicksort(b3);
-    for (int y = 0; y < b3.length; y++){
-      System.out.println(b3[y]);
     }
   }
 
