@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.Random;
 public class Quick{
   //helper that switches places
-  private static void switchPlace(int[] data, int first, int second){
+  private static void switch(int[] data, int first, int second){
     int temp = data[first];
     data[first] = data[second];
     data[second] = temp;
@@ -36,7 +36,7 @@ public class Quick{
     int upper = end;
     int lower = start + 1;
     int pivot = data[big];
-    switchPlace(data, start, big);
+    switch(data, start, big);
     //System.out.println("end:  " + data[start] + "middle: " + data[middle] + "end: " + data[end]);
     //System.out.println("pivot: " + pivot);
     //testing purposes
@@ -45,13 +45,13 @@ public class Quick{
     while (lower <= upper){
 
       if (data[lower] < pivot){
-        switchPlace(data, lower, start);
+        switch(data, lower, start);
         lower++;
         start++;
         //System.out.println("lower: " + lower + "\n" + "upper: " + upper);
       }
       else if (data[lower] > pivot){
-        switchPlace(data, lower, upper);
+        switch(data, lower, upper);
         //System.out.println("lower: " + lower + "\n" + "upper: " + upper);
         upper--;
       }
@@ -66,6 +66,8 @@ public class Quick{
 //better code
 
   public static int partition (int [] data, int start, int end){
+    int rando = 2;
+    Random random = new Random();
     //int randnum = (int)(Math.random() * (end - start) + start + 1);
     int middle = ((end - start) / 2) + start;
     int biggest = whichBig(data[middle], data[start], data[end]);
@@ -79,7 +81,7 @@ public class Quick{
       big = end;
     }
     //pivot needs to be at end index to work.
-    switchPlace(data, big, end);
+    switch(data, big, end);
     int pivot = data[end];
     int upper = end;
     //testing purposes
@@ -87,13 +89,20 @@ public class Quick{
     //lower needs to smaller than increment.
     int lower = start - 1;
     for (int increment = start; increment < upper; increment++){
-      if (data[increment] < pivot){
+      rando = random.nextInt(2)+1;
+      if (data[increment] == pivot){
+        if (rando == 1){
+          lower++;
+          switch(data, lower, increment);
+        }
+      }
+      else if (data[increment] < pivot){
         //increment lower because element is smaller than pivot.
         lower++;
-        switchPlace(data, lower, increment);
+        switch(data, lower, increment);
       }
     }
-    switchPlace(data, lower + 1, end);
+    switch(data, lower + 1, end);
     //return last position of pivot.
     return lower + 1;
   }
