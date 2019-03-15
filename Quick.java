@@ -1,3 +1,5 @@
+import java.util.*;
+import java.util.Random;
 public class Quick{
   //helper that switches places
   private static void switchPlace(int[] data, int first, int second){
@@ -7,39 +9,93 @@ public class Quick{
   }
 
   //helper for partition that finds median value
-  public static int whichBig(int x, int y, int z){
-    if ((x > y && x < z ) || (x < y && x > z )) return x;
-    if ((x > y && y > z ) || (x < y && y < z )) return y;
-    return z;
+  private static int whichBig(int x, int y, int z){
+    int[] val = new int[2];
+    if ((x > y && x < z ) || (x < y && x > z )) return 0;
+    if ((x > y && y > z ) || (x < y && y < z )) return 1;
+    return 2;
   }
+//first attempt.
+/*
   public static int partition (int [] data, int start, int end){
     //int randnum = (int)(Math.random() * (end - start) + start + 1);
     //int pivot = data[randnum];
-
+    Random random = new Random();
+    int rando = 2;
     int middle = ((end - start) / 2) + start;
-    int pivot = whichBig(data[middle], data[start], data[end]);
+    int biggest = whichBig(data[middle], data[start], data[end]);
+    int big;
+    if (biggest == 0){
+      big = middle;
+    }else if(biggest == 1){
+      big = start;
+    }
+    else{
+      big = end;
+    }
     int upper = end;
+    int lower = start + 1;
+    int pivot = data[big];
+    switchPlace(data, start, big);
     //System.out.println("end:  " + data[start] + "middle: " + data[middle] + "end: " + data[end]);
     //System.out.println("pivot: " + pivot);
     //testing purposes
-    System.out.println("actual pivot, not index: " + pivot);
+    //System.out.println("actual pivot, not index: " + pivot);
     //lower needs to smaller than increment.
-    int lower = start;
-    while (lower < upper){
-      while (lower <= upper && data[lower] <= pivot){
-        //System.out.println("lower: " + lower + "\n" + "upper: " + upper);
+    while (lower <= upper){
+
+      if (data[lower] < pivot){
+        switchPlace(data, lower, start);
         lower++;
+        start++;
+        //System.out.println("lower: " + lower + "\n" + "upper: " + upper);
       }
-      while (upper >= lower && data[upper] > pivot){
+      else if (data[lower] > pivot){
+        switchPlace(data, lower, upper);
         //System.out.println("lower: " + lower + "\n" + "upper: " + upper);
         upper--;
       }
-      if (upper > lower){
-        switchPlace(data, upper, lower);
+      else{
+        lower++;
+
       }
     }
     //return last position of pivot.
-    return lower;
+    return upper;
+  }*/
+//better code
+
+  public static int partition (int [] data, int start, int end){
+    //int randnum = (int)(Math.random() * (end - start) + start + 1);
+    int middle = ((end - start) / 2) + start;
+    int biggest = whichBig(data[middle], data[start], data[end]);
+    int big;
+    if (biggest == 0){
+      big = middle;
+    }else if(biggest == 1){
+      big = start;
+    }
+    else{
+      big = end;
+    }
+    //pivot needs to be at end index to work.
+    switchPlace(data, big, end);
+    int pivot = data[end];
+    int upper = end;
+    //testing purposes
+    //System.out.println("actual pivot, not index: " + pivot);
+    //lower needs to smaller than increment.
+    int lower = start - 1;
+    for (int increment = start; increment < upper; increment++){
+      if (data[increment] < pivot){
+        //increment lower because element is smaller than pivot.
+        lower++;
+        switchPlace(data, lower, increment);
+      }
+    }
+    switchPlace(data, lower + 1, end);
+    //return last position of pivot.
+    return lower + 1;
   }
   /*return the value that is the kth smallest value of the array.
   */
@@ -85,9 +141,10 @@ public class Quick{
 
      int pivot = partition(data, start, end);
      //testing purposes
+     /*
      for (int y = 0; y < data.length; y++){
        System.out.println(data[y]);
-     }
+     }*/
     // System.out.println("data: ");
       quicksort(data, start, pivot - 1);
       quicksort(data, pivot + 1, end);
@@ -108,12 +165,12 @@ public class Quick{
       System.out.println(b[x]);
     }
     System.out.println("\n" + "quickselect testing" + "\n");
-    int[] b1 = new int[] {1, 5, 7, 2, 6, 4, 3};
+    int[] b1 = new int[] {1, 5, 5, 5, 7, 2, 6, 4, 3};
     System.out.println(quickselect(b1, 3));*/
     System.out.println("\n" + "quicksort testing" + "\n");
 
     // TEST FOR DUPLICATES LATER
-    int[] b2 = new int[] {1, 5, 7, 2, 6, 4, 3, 13, 23, 23, 92, 0, 200};
+    int[] b2 = new int[] {1, 1, 2, 3, 5, 7, 2, 6, 4, 3, 13, 23, 23, 92, 0, 200};
     quicksort(b2);
     for (int y = 0; y < b2.length; y++){
       System.out.println(b2[y]);
