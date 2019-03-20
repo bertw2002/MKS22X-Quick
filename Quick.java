@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.Random;
 public class Quick{
   //helper that switches places
-  private static void switch(int[] data, int first, int second){
+  private static void switchPlace(int[] data, int first, int second){
     int temp = data[first];
     data[first] = data[second];
     data[second] = temp;
@@ -81,7 +81,7 @@ public class Quick{
       big = end;
     }
     //pivot needs to be at end index to work.
-    switch(data, big, end);
+    switchPlace(data, big, end);
     int pivot = data[end];
     int upper = end;
     //testing purposes
@@ -93,16 +93,16 @@ public class Quick{
       if (data[increment] == pivot){
         if (rando == 1){
           lower++;
-          switch(data, lower, increment);
+          switchPlace(data, lower, increment);
         }
       }
       else if (data[increment] < pivot){
         //increment lower because element is smaller than pivot.
         lower++;
-        switch(data, lower, increment);
+        switchPlace(data, lower, increment);
       }
     }
-    switch(data, lower + 1, end);
+    switchPlace(data, lower + 1, end);
     //return last position of pivot.
     return lower + 1;
   }
