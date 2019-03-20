@@ -1,6 +1,18 @@
 import java.util.*;
 import java.util.Random;
 public class Quick{
+  private static void insertionSort(int[] data, int lo, int hi){
+    int compare;
+    for (int x = lo + 1; x < hi + 1; x++){
+      compare = data[x];
+      int count2 = x;
+      while (count2 > lo && compare < data[count2 - 1]){
+        data[count2] = data[count2 - 1];
+        count2--;
+      }
+      data[count2] = compare;
+    }
+  }
   //helper that switches places
   private static void switchPlace(int[] data, int first, int second){
     int temp = data[first];
@@ -146,7 +158,11 @@ public class Quick{
    if (start >= end) {
      //as per Mr. K's suggestion.
      return;
-   }else{
+   }
+   if (end - start <= 40){
+     insertionSort(data, start, end);
+   }
+   else{
 
      int pivot = partition(data, start, end);
      //testing purposes
